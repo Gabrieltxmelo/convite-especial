@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Convite Especial ❤️</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #111;
+    overflow: hidden;
+}
+
+/* CELULAR */
+.phone {
+    width: 360px;
+    height: 720px;
+    position: relative;
+    overflow: hidden;
+    border: 8px solid #252b35;
+    border-radius: 42px;
+    background: linear-gradient(180deg, #ff3b12 0%, #e52a08 100%);
+    box-shadow: 0 25px 70px rgba(0,0,0,.65);
+}
+
+/* NOTCH */
+.phone::before {
+    content: "";
+    position: absolute;
+    z-index: 20;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 25px;
+    border-radius: 20px;
+    background: #252b35;
+}
+
+/* CORAÇÕES */
+.hearts {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.heart {
+    position: absolute;
+    color: #26394b;
+    font-size: 22px;
+    opacity: .9;
+    animation: floatHeart linear infinite;
+    filter: drop-shadow(0 2px 2px rgba(0,0,0,.35));
+}
+
+@keyframes floatHeart {
+    from {
+        transform: translateY(760px) rotate(0deg);
+    }
+    to {
+        transform: translateY(-80px) rotate(25deg);
+    }
+}
+
+.screen {
+    position: relative;
+    z-index: 5;
+    width: 100%;
+    height: 100%;
+    padding: 35px 22px 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page {
+    width: 100%;
+    text-align: center;
+    animation: pageIn .35s ease;
+}
+
+@keyframes pageIn {
+    from {
+        opacity: 0;
+        transform: scale(.96) translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.hidden {
+    display: none !important;
+}
+
+.card {
+    width: 100%;
+    padding: 22px 18px;
+    border-radius: 18px;
+    background: rgba(83, 13, 5, .72);
+    box-shadow: 0 12px 25px rgba(70, 10, 0, .35);
+    color: white;
+}
+
+.emoji {
+    font-size: 76px;
+    line-height: 1;
+    margin-bottom: 16px;
+}
+
+.big-emoji {
+    font-size: 105px;
+    margin-bottom: 20px;
+}
+
+h1, h2 {
+    color: white;
+    text-transform: uppercase;
+    font-weight: 900;
+    letter-spacing: .5px;
+}
+
+h1 {
+    font-size: 23px;
+    line-height: 1.15;
+}
+
+h2 {
+    font-size: 20px;
+    line-height: 1.2;
+}
+
+p {
+    margin-top: 12px;
+    color: white;
+    font-size: 14px;
+    line-height: 1.45;
+}
+
+.btn-row {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 18px;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+    border-radius: 25px;
+    font-size: 15px;
+    font-weight: 800;
+    padding: 12px 23px;
+    color: #fff;
+    background: #ff4b20;
+    box-shadow: 0 5px 12px rgba(0,0,0,.28);
+    transition: .2s;
+}
+
+button:hover {
+    transform: translateY(-2px) scale(1.03);
+}
+
+button:active {
+    transform: scale(.96);
+}
+
+.btn-white {
+    color: #e8320b;
+    background: white;
+}
+
+.next-btn {
+    width: 100%;
+    margin-top: 18px;
+}
+
+/* CAMPOS */
+.field {
+    text-align: left;
+    margin-top: 15px;
+}
+
+.field label {
+    display: block;
+    margin: 0 0 7px 3px;
+    color: white;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+input,
+select {
+    width: 100%;
+    height: 48px;
+    padding: 0 15px;
+    border-radius: 25px;
+    border: 1px solid #ff7253;
+    outline: none;
+    background: #52150e;
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+}
+
+input:focus,
+select:focus {
+    border-color: white;
+}
+
+/* ATIVIDADES */
+.activity-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.activity {
+    min-height: 82px;
+    padding: 10px 5px;
+    border-radius: 13px;
+    border: 1px solid #ff6848;
+    background: #52150e;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.activity span {
+    font-size: 27px;
+    margin-bottom: 5px;
+}
+
+.activity.selected {
+    background: #ff4b20;
+    border: 3px solid white;
+    box-shadow: 0 0 12px rgba(255,255,255,.35);
+}
+
+/* RESULTADO */
+.final-emoji {
+    font-size: 105px;
+    margin-bottom: 5px;
+}
+
+.details {
+    margin-top: 18px;
+    text-align: left;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.details strong {
+    color: #fff;
+}
+
+.restart {
+    margin-top: 18px;
+    background: white;
+    color: #e8320b;
+}
+
+/* RESPONSIVO */
+@media (max-height: 760px) {
+    .phone {
+        transform: scale(.92);
+    }
+}
+
+@media (max-width: 390px) {
+    .phone {
+        width: 100vw;
+        height: 100vh;
+        border-radius: 0;
+        border: none;
+    }
+
+    .whatsapp-btn {
+    width: 100%;
+    margin-top: 15px;
+    background: #25D366;
+    color: white;
+}
+}
+</style>
+</head>
+
+<body>
+
+<div class="phone">
+
+    <div class="hearts" id="hearts"></div>
+
+    <main class="screen">
+
+        <!-- TELA 1 -->
+        <section class="page hidden" id="page1">
+            <div class="emoji">🥺</div>
+
+            <div class="card">
+                <h1>VOCÊ ACEITARIA IR À UM DATE COMIGO?</h1>
+
+                <div class="btn-row">
+
+                    <button id="btnSim" class="btn-white" onclick="aceitar()">
+                         SIM 💙
+                    </button>
+
+                    <button id="btnNao" onclick="clicarNao()">
+                         NÃO
+                    </button>
+
+                </div>
+            </div>
+        </section>
+
+<!-- TELA DE SENHA -->
+<section class="page" id="telaSenha">
+    <div class="emoji">🔐</div>
+
+    <div class="card">
+        <h2>UM CONVITE ESPECIAL 💙</h2>
+
+        <p>Digite a senha para abrir seu convite 😊</p>
+
+        <div class="field">
+            <input 
+                type="password" 
+                id="senhaConvite"
+                placeholder="Digite a senha"
+                onkeydown="if(event.key === 'Enter') verificarSenha()"
+            >
+        </div>
+
+        <button class="next-btn" onclick="verificarSenha()">
+            ABRIR CONVITE ❤️
+        </button>
+
+        <p id="erroSenha" style="color: #ffd1d1; display: none;">
+            Senha incorreta 😭
+        </p>
+    </div>
+</section>
+
+        <!-- TELA 2 -->
+        <section class="page hidden" id="page2">
+            <div class="emoji">🥰</div>
+
+            <div class="card">
+                <h2>VOCÊ DISSE SIM? 😏</h2>
+                <p>Eu estava esperando você dizer não 😂</p>
+
+                <button class="next-btn" onclick="irPara(3)">
+                    PRÓXIMO 💙
+                </button>
+            </div>
+        </section>
+
+        <!-- TELA 3 -->
+        <section class="page hidden" id="page3">
+            <div class="card">
+                <h2>📅 QUANDO VOCÊ TÁ LIVRE?</h2>
+
+                <div class="field">
+                    <label for="date">Escolhe a data</label>
+                    <input type="date" id="date">
+                </div>
+
+                <div class="field">
+                    <label for="time">Escolhe o horário</label>
+                    <input type="time" id="time" value="19:00">
+                </div>
+
+                <button class="next-btn" onclick="confirmarData()">
+                    SELECIONAR A DATA 💙
+                </button>
+            </div>
+        </section>
+
+        <!-- TELA 4 -->
+        <section class="page hidden" id="page4">
+            <div class="card">
+                <h2>O QUE TÁ A FIM? 😊</h2>
+
+                <div class="activity-grid">
+
+                    <button class="activity" data-value="Hambúrguer" onclick="selecionar(this)">
+                        <span>🍔</span>
+                        Hambúrguer
+                    </button>
+
+                    <button class="activity" data-value="Sushi" onclick="selecionar(this)">
+                        <span>🍣</span>
+                        Sushi
+                    </button>
+
+                    <button class="activity" data-value="Massas" onclick="selecionar(this)">
+                        <span>🍝</span>
+                        Massas
+                    </button>
+
+                    <button class="activity" data-value="Tacos" onclick="selecionar(this)">
+                        <span>🌮</span>
+                        Tacos
+                    </button>
+
+                    <button class="activity" data-value="Pizza" onclick="selecionar(this)">
+                        <span>🍕</span>
+                        Pizza
+                    </button>
+
+                </div>
+
+                <button class="next-btn" onclick="confirmarAtividade()">
+                    BORA! 💙
+                </button>
+            </div>
+        </section>
+
+        <!-- TELA FINAL -->
+        <section class="page hidden" id="page5">
+            <div class="final-emoji">😘🌹</div>
+
+            <div class="card">
+                <h2>TUDO CERTO,<br>MEU BEM. 💙</h2>
+
+                <p>Fica pronta que eu vou te buscar 🚗</p>
+
+                <div class="details">
+                    📅 <strong id="finalDate"></strong><br>
+                    ⏰ <strong id="finalTime"></strong><br>
+                    🍣 <strong id="finalActivity"></strong><br>
+                    ✨ <strong>Restaurante eu escolho haha</strong>
+                </div>
+
+                <button class="whatsapp-btn" onclick="enviarWhatsApp()">
+                    CONFIRMAR PELO WHATSAPP 💚
+                </button>
+
+                <button class="restart" onclick="reiniciar()">
+                    FINAL FELIZ ❤️
+                </button>
+            </div>
+        </section>
+
+    </main>
+</div>
+
+<script>
+let dataEscolhida = "";
+let horaEscolhida = "19:00";
+let atividadeEscolhida = "";
+
+/* CRIA OS CORAÇÕES */
+function criarCoracoes() {
+    const container = document.getElementById("hearts");
+
+    for (let i = 0; i < 22; i++) {
+        const heart = document.createElement("div");
+
+        heart.className = "heart";
+        heart.innerHTML = "♥";
+
+        heart.style.left = Math.random() * 100 + "%";
+        heart.style.animationDuration = (7 + Math.random() * 8) + "s";
+        heart.style.animationDelay = (-Math.random() * 10) + "s";
+        heart.style.fontSize = (14 + Math.random() * 22) + "px";
+
+        container.appendChild(heart);
+    }
+}
+
+/* TROCA DE TELAS */
+function irPara(numero) {
+    document.querySelectorAll(".page").forEach(page => {
+        page.classList.add("hidden");
+    });
+
+    document.getElementById("page" + numero).classList.remove("hidden");
+}
+
+/* BOTÃO SIM */
+function aceitar() {
+    irPara(2);
+}
+
+function clicarNao() {
+
+    const btnSim = document.getElementById("btnSim");
+    const btnNao = document.getElementById("btnNao");
+
+    // Se estiver no estado "TEM CERTEZA?",
+    // o botão NÃO volta para o estado inicial
+    if (btnNao.innerHTML.includes("TEM CERTEZA")) {
+
+        voltarAoNormal();
+
+        return;
+    }
+
+    // Guarda o texto original
+    btnNao.innerHTML = "TEM CERTEZA? 😭";
+
+    // O botão SIM vira NÃO
+    btnSim.innerHTML = "NÃO";
+
+    // O botão que virou NÃO agora volta para o ciclo
+    btnSim.onclick = voltarAoNormal;
+
+    // O botão TEM CERTEZA começa a fugir
+    btnNao.style.position = "absolute";
+
+    btnNao.onmouseenter = fugirBotao;
+    btnNao.ontouchstart = fugirBotao;
+}
+
+
+function voltarAoNormal() {
+
+    const btnSim = document.getElementById("btnSim");
+    const btnNao = document.getElementById("btnNao");
+
+    // Volta para o estado inicial
+    btnSim.innerHTML = "SIM 💙";
+    btnNao.innerHTML = "NÃO";
+
+    // SIM volta a aceitar o clique
+    btnSim.onclick = aceitar;
+
+    // NÃO volta a chamar o ciclo
+    btnNao.onclick = clicarNao;
+
+    // Remove o comportamento de fuga
+    btnNao.onmouseenter = null;
+    btnNao.ontouchstart = null;
+
+    // Volta o botão para a posição normal
+    btnNao.style.position = "";
+    btnNao.style.left = "";
+    btnNao.style.top = "";
+}
+
+
+function fugirBotao(e) {
+
+    const botao = e.currentTarget;
+    const celular = document.querySelector(".phone");
+
+    const largura = celular.clientWidth;
+    const altura = celular.clientHeight;
+
+    const larguraBotao = botao.offsetWidth;
+    const alturaBotao = botao.offsetHeight;
+
+    const margem = 20;
+
+    const novaEsquerda =
+        margem +
+        Math.random() *
+        (largura - larguraBotao - margem * 2);
+
+    const novoTopo =
+        margem +
+        Math.random() *
+        (altura - alturaBotao - margem * 2);
+
+    botao.style.left = novaEsquerda + "px";
+    botao.style.top = novoTopo + "px";
+}
+
+/* DATA */
+function confirmarData() {
+    const date = document.getElementById("date").value;
+    const time = document.getElementById("time").value;
+
+    if (!date) {
+        alert("Escolhe uma data primeiro ❤️");
+        return;
+    }
+
+    if (!time) {
+        alert("Escolhe um horário primeiro ⏰");
+        return;
+    }
+
+    dataEscolhida = date;
+    horaEscolhida = time;
+
+    irPara(4);
+}
+
+/* ATIVIDADE */
+function selecionar(botao) {
+    document.querySelectorAll(".activity").forEach(item => {
+        item.classList.remove("selected");
+    });
+
+    botao.classList.add("selected");
+    atividadeEscolhida = botao.dataset.value;
+}
+
+/* FINAL */
+function confirmarAtividade() {
+    if (!atividadeEscolhida) {
+        alert("Escolhe o que você está a fim primeiro 😊");
+        return;
+    }
+
+    document.getElementById("finalDate").textContent =
+        formatarData(dataEscolhida);
+
+    document.getElementById("finalTime").textContent =
+        horaEscolhida;
+
+    document.getElementById("finalActivity").textContent =
+        atividadeEscolhida;
+
+    irPara(5);
+}
+
+/* FORMATA DATA */
+function formatarData(data) {
+    const partes = data.split("-");
+
+    if (partes.length !== 3) {
+        return data;
+    }
+
+    return `${partes[2]}/${partes[1]}/${partes[0]}`;
+}
+
+/* REINICIAR */
+function reiniciar() {
+    dataEscolhida = "";
+    horaEscolhida = "19:00";
+    atividadeEscolhida = "";
+
+    document.getElementById("date").value = "";
+    document.getElementById("time").value = "19:00";
+
+    document.querySelectorAll(".activity").forEach(item => {
+        item.classList.remove("selected");
+    });
+
+    irPara(1);
+}
+
+/* INICIALIZA */
+criarCoracoes();
+
+/* Define a data mínima como hoje */
+const hoje = new Date();
+const ano = hoje.getFullYear();
+const mes = String(hoje.getMonth() + 1).padStart(2, "0");
+const dia = String(hoje.getDate()).padStart(2, "0");
+
+document.getElementById("date").min = `${ano}-${mes}-${dia}`;
+function enviarWhatsApp() {
+
+    const data = formatarData(dataEscolhida);
+    const horario = horaEscolhida;
+    const escolha = atividadeEscolhida;
+
+    const mensagem =
+        `❤️ Confirmei nosso date!\n\n` +
+        `📅 Data: ${data}\n` +
+        `⏰ Horário: ${horario}\n` +
+        `🍴 Escolha: ${escolha}\n\n` +
+        `Mal posso esperar! 🥰`;
+
+    // COLOQUE SEU NÚMERO AQUI
+    const seuNumero = "5511979518753";
+
+    const link =
+        `https://wa.me/${seuNumero}?text=${encodeURIComponent(mensagem)}`;
+
+    window.location.href = link;
+}
+
+function verificarSenha() {
+    const senhaCorreta = "1234";
+    const senhaDigitada = document.getElementById("senhaConvite").value;
+    const erro = document.getElementById("erroSenha");
+
+    if (senhaDigitada === senhaCorreta) {
+        document.getElementById("telaSenha").classList.add("hidden");
+        document.getElementById("page1").classList.remove("hidden");
+    } else {
+        erro.style.display = "block";
+        document.getElementById("senhaConvite").value = "";
+        document.getElementById("senhaConvite").focus();
+    }
+}
+
+</script>
+
+</body>
+</html>
